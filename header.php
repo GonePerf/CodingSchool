@@ -10,13 +10,16 @@
     <div id="slideout-menu">
         <ul>
             <li>
-                <a href="<?php echo site_url(''); ?>">Home</a>
+                <a href="<?php echo site_url(''); ?>">
+                Home</a>
             </li>
             <li>
-                <a href="<?php echo site_url('/courses'); ?>">Courses</a>
+                <a href="<?php echo site_url('/courses'); ?>">
+                Courses</a>
             </li>
             <li>
-                <a href="<?php echo site_url('/projects'); ?>">Projects</a>
+                <a href="<?php echo site_url('/projects'); ?>">
+                Projects</a>
             </li>
             <li>
                 <a href="<?php echo site_url('/contact'); ?>">Contact</a>
@@ -41,16 +44,25 @@
         <ul>
             <li>
                 <!-- TOP MENU -->
-                <a class="active" href="<?php echo site_url(''); ?>">Home</a>
+                <a href="<?php echo site_url(''); ?>"
+                <?php if(is_front_page()) echo 'class="active"' ?> 
+                >Home</a>
             </li>
             <li>
-                <a href="<?php echo site_url('/courses'); ?>">Courses</a>
+
+                <a href="<?php echo site_url('/courses'); ?>"
+                <?php if(is_page('courses')) echo 'class="active"' ?> >
+                Courses</a>
             </li>
             <li>
-                <a href="<?php echo site_url('/projects'); ?>">Projects</a>
+                <a href="<?php echo site_url('/projects'); ?>"
+                <?php if(is_page('projects')) echo 'class="active"' ?> >
+                 Projects</a>
             </li>
             <li>
-                <a href="<?php echo site_url('/contact'); ?>">Contact</a>
+                <a href="<?php echo site_url('/contact'); ?>"
+                <?php if(is_page('contact')) echo 'class="active"' ?> >
+                Contact</a>
             </li>
             <li>
                 <div id="search-icon">
