@@ -1,30 +1,67 @@
 <?php 
+    require_once "config.php";
 
-$_SESSION['message'] = '';
+    $email = $password = $confirm_password = "";
+    $email_err = $password_err = $confirm_password_err = "";
 
-session_start();
-
-$mysqli = mysqli_connect('remotemysql.com','vNUkda7PJi','BrgbpTWV2C','vNUkda7PJi');
-
-if(isset($_POST['register-btn'])){
-
-    if($_POST['reg-password_1'] == $_POST['reg-password_2']){
-        $email = mysqli_real_escape_string($mysqli, $_POST['reg-email']);
-        $password = mysqli_real_escape_string($mysqli, $_POST['reg-password_1']);
-        $name = mysqli_real_escape_string($mysqli, $_POST['reg-name']);
-
-        $sql = "INSERT INTO users(email, pass, username, c1, c2, c3, c4)
-             VALUES('$email', '$password', '$name', 0, 0, 0, 0)";
-
-
-        if(mysqli_query($mysqli,$sql)){
-            echo "KONTO UTWORZONE";
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        if(empty(trim($_POST["email"]))) {
+            $username_err = "Please enter a email.";
         }
-
+        else {
+            $sql = "SELECT email FROM users WHERE username = ?";
+            if($stmt = mysqli_prepare($link, $sql)){
+                mysqli_stmt_bind_param($stmt, "s", $param_username);
+                $param_username = trim($_POST["email"]);
+                if(mysqli_stmt_execute($stmt)){
+                    /* store result */
+                    mysqli_stmt_store_result($stmt);
+                    
+                    if(mysqli_stmt_num_rows($stmt) == 1){
+                        $username_err = "This username is already taken.";
+                    } else{
+                        $username = trim($_POST["username"]);
+                    }
+                } else{
+                    echo "Oops! Something went wrong. Please try again later.";
+                }
+                mysqli_stmt_close($stmt);
+            }
+        }
     }
 
+// $_SESSION['message'] = '';
 
-}
+// session_start();
+
+// $mysqli = mysqli_connect('remotemysql.com','vNUkda7PJi','BrgbpTWV2C','vNUkda7PJi');
+// if (mysqli_connect_errno()){
+//     echo "Failed to connect to MySQL: " . mysqli_connect_error();
+// }
+
+// if(isset($_POST['register-btn'])){
+
+//     if($_POST['reg-password_1'] == $_POST['reg-password_2']){
+        
+//         $email = mysqli_real_escape_string($mysqli, $_POST['reg-email']);
+//         $password = mysqli_real_escape_string($mysqli, $_POST['reg-password_1']);
+//         $name = mysqli_real_escape_string($mysqli, $_POST['reg-name']);
+        
+//         $sql = "INSERT INTO users(email, password, name, c1, c2, c3, c4)
+//              VALUES('$email', '$password', '$name', 0, 0, 0, 0)";
+
+        
+//         if(mysqli_query($mysqli,$sql)){
+//             echo "KONTO UTWORZONE";
+//         }
+//         else {
+//             echo mysqli_error($mysqli);
+//         }
+
+//     }
+
+
+// }
 
 
 get_header();
