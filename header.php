@@ -44,6 +44,12 @@
         <ul>
             <li>
                 <!-- TOP MENU -->
+                <a href="<?php echo site_url('/log-in'); ?>"
+                <?php if(is_page('log-in')) echo 'class="active"' ?> 
+                >Sign In</a>
+            </li>
+            <li>
+                <!-- TOP MENU -->
                 <a href="<?php echo site_url(''); ?>"
                 <?php if(is_front_page()) echo 'class="active"' ?> 
                 >Home</a>
