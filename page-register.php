@@ -118,6 +118,7 @@ get_header();
     <main>
         
         <h2 class="section-heading" style="margin-top: 100px;">Registration</h2>
+        <h4>Create an account to view the content of the courses</h4>
             <section>
             <div style="width: 100%;  margin-bottom: 50px;">
                 <div id="inputs" style = "width: 250px; margin:auto;">
@@ -128,7 +129,7 @@ get_header();
                         <input required name="reg-password_2" placeholder="Confirm password" type = "password" style = "width: 200px; margin-bottom: 10px; text-align: center;">
                         <input required name="reg-name" placeholder="Your name" type = "text" style = "width: 200px; margin-bottom: 10px; text-align: center;">
                         <button name="register-btn" type="submit" style="width: 232px; height: 40px;">Submit</button>
-                        <br><a href="<?php echo site_url('/log-in'); ?>" style = "margin-top: 20px;">You have account?</a>
+                        
                     </form>
                 </div>
                 
@@ -146,15 +147,18 @@ get_header();
                         color: red;
                     }
                     button{
-                        font-weight: bold;
                         font-size: 20px;
                         margin-bottom: 20px;
-                        background: black;
-                        color: white;
+                        background: none;
+                        border: 1px solid black;
+                        color: black;
                         transition: 0.4s;
+                        border-radius: 10px;
                     }
                     button:hover{
                         color: red;
+                        box-shadow: inset 8px 3px 18px -4px rgba(0, 0, 0, 0.4);
+
                         cursor: pointer;
                         transition: 0.4s;
                     }

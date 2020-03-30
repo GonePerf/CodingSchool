@@ -79,7 +79,7 @@
             <li>
                 <a href="<?php echo site_url('/contact'); ?>"
                 <?php if(is_page('contact')) echo 'class="active"' ?> >
-                Contact</a>
+                <i class="fas fa-phone" alt="Contact"></i></a>
             </li>
             <li>
                 <div id="search-icon">

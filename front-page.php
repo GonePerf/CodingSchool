@@ -4,7 +4,7 @@ session_start();
 get_header(); ?>
     <div id="banner">
         <h1>&lt;Cooding School /&gt;</h1>
-        <h3>Learn coding from courses</h3>
+        <h3><a href = "<?php echo site_url('/register'); ?>" style="color: white; text-decoration: none; cursor: pointer;">Join now and learn coding <i class="fas fa-hand-pointer"></i> </a></h3>
     </div>
 
     <main>

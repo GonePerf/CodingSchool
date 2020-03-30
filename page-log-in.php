@@ -101,12 +101,16 @@ get_header(); ?>
                     button{
                         font-size: 20px;
                         margin-bottom: 20px;
-                        background: black;
-                        color: white;
+                        background: white;
+                        border: 1px solid black;
+                        border-radius: 10px;
+                        color: black;
                         transition: 0.4s;
                     }
                     button:hover{
                         color: red;
+                        box-shadow: inset 8px 3px 18px -4px rgba(0, 0, 0, 0.4);
+
                         cursor: pointer;
                         transition: 0.4s;
                         
