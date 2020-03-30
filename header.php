@@ -44,9 +44,20 @@
         <ul>
             <li>
                 <!-- TOP MENU -->
-                <a href="<?php echo site_url('/log-in'); ?>"
-                <?php if(is_page('log-in')) echo 'class="active"' ?> 
-                >Sign In</a>
+                <?php if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){ 
+                   echo  "<a href=".site_url('/logout').">Sign Out</a>";
+                    
+                }else{
+                    if(is_page('log-in')){
+                        echo "<a href=".site_url('/log-in').' class="active"'.  
+                        ">Sign In</a>";
+                    }
+                    else{
+                        echo "<a href=".site_url('/log-in').
+                        ">Sign In</a>";
+                    }
+                }
+                ?>
             </li>
             <li>
                 <!-- TOP MENU -->

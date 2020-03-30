@@ -1,4 +1,6 @@
-<?php get_header(); ?>
+<?php 
+session_start();
+get_header(); ?>
 <main>
         <h2 class = "page-heading">All Courses</h2>
             <section>

@@ -1,4 +1,7 @@
-<?php get_header(); ?>
+<?php
+session_start();
+
+get_header(); ?>
     <div id="banner">
         <h1>&lt;Cooding School /&gt;</h1>
         <h3>Learn coding from courses</h3>

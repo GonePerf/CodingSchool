@@ -1,4 +1,16 @@
-﻿<?php get_header();  ?>
+﻿<?php 
+
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: ".site_url('/log-in'));
+
+    exit;
+}
+
+
+get_header();  ?>
 
 <main>
         <h2 class="page-heading">Course: Java</h2>
