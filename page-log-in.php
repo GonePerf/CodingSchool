@@ -39,9 +39,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $username; 
+                            
+                            
 
-                            header("location: ".site_url('/java'));
-
+                            header("location: ".site_url());
+                        
                         }
                         else{
                             $password_err = "The password you entered was not valid.";
