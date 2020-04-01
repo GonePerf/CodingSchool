@@ -18,33 +18,53 @@ require_once "config.php";
         <div id="course-container">
         <section id="blogpost" style = "width: 100%;  border: none;">
             <div id = "choose">
-                <select>
-                <option>-</option>
-                <?php  
-
-                    $result = mysqli_query($link,"SELECT course_name FROM courses");
+            <form action="" method="post">
+                <select name = "course_id">
+                <option value="">----</option>
+                <?php 
+                    
+                    $result = mysqli_query($link,"SELECT course_id, course_name FROM courses");
                     while ($row = $result->fetch_assoc()) {
-                        echo "<option>".$row['course_name']."</option>";
+                        if($_POST['course_id'] == $row['course_id']){
+                            echo "<option selected value=".$row['course_id'].">".$row['course_name']."</option>";
+                        }
+                        else {
+                            echo "<option value=".$row['course_id'].">".$row['course_name']."</option>";
+                        }
+                        
                     }
-                    $result = mysqli_query($link,"SELECT project_name FROM projects");
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<option>".$row['project_name']."</option>";
-                    }
+                    // $result = mysqli_query($link,"SELECT project_name FROM projects");
+                    // while ($row = $result->fetch_assoc()) {
+                    //     echo "<option>".$row['project_name']."</option>";
+                    // }
                 ?>
                 </select>
-                <button id="change" style = "float: right; width: 45%; height: 40px;" type = "submit">Edit</button>
+                <input name = "edit" id="change" style = "float: right; width: 45%; height: 40px;" type = "submit" value = "Edit" />
+                </form>
             </div>
             <div id="editor">
                 <?php 
-                    
-                    //$content = "";
-                    $result = mysqli_query($link,"SELECT content FROM courses WHERE course_name = 'Java programming'");
-                    while ($row = $result->fetch_assoc()) {
-                        echo $row['content']."<br>";
+                    if(isset($_POST['edit'])){
+                        $selected_val = $_POST['course_id'];
+                        $result = mysqli_query($link,"SELECT content FROM courses WHERE course_id = '$selected_val'");
+                        while ($row = $result->fetch_assoc()) {
+                            echo $row['content']."<br>";
+                        }
+                        
                     }
+                    
                 ?>
              </div>
-            <button id="change" style = "height: 40px;" type = "submit">Submit</button>
+            <form action = "" method = "post">
+             <input name = "submit" id="change" type = "submit" value = "Submit" />
+             </form>
+
+             <?php 
+                if(isset($_POST['submit'])){
+                //    here updating database code
+                }
+                    
+             ?>
             <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
             </section>
             
