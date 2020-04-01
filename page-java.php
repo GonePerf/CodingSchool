@@ -13,7 +13,17 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 get_header();  ?>
 
 <main>
-        <h2 class="page-heading">Course: Java</h2>
+        <h2 class="page-heading">Course: 
+            <?php   
+                require_once "config.php";
+               
+                $result = mysqli_query($link,"SELECT course_name FROM courses WHERE course_id = '1'");
+                while ($row = $result->fetch_assoc()) {
+                    echo $row['course_name'];
+                }
+
+            ?>
+        </h2>
         <div id="course-container">
             <section id="blogpost">
                <div class="course">
@@ -23,45 +33,18 @@ get_header();  ?>
                    <div class="course-image">
                        <img src="<?php echo get_template_directory_uri(); ?>/img/java.jpg"  style="width: 95%;" alt="Course Image">
                    </div>
-                   <div class="course-descrition">
-                       <h3>Introduction</h3>
-                       <p>Paragraf</p>
-                       Lorem Ipsum is simply dummy text of the printing and
-                       typesetting industry. Lorem Ipsum has been the 
-                       industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and
-                         scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and
-                         typesetting industry. Lorem Ipsum has been the 
-                         <p>Paragraf</p>
-                         industry's standard dummy text ever since the 1500s,
-                          when an unknown printer took a galley of type and
-                           scrambled it to make a type specimen book.
-                           Lorem Ipsum is simply dummy text of the printing and
-                           typesetting industry. Lorem Ipsum has been the 
-                           industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and
-                            <p>Paragraf</p>
-                             scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and
-                             typesetting industry. Lorem Ipsum has been the 
-                             industry's standard dummy text ever since the 1500s,
-                              when an unknown printer took a galley of type and
-                               scrambled it to make a type specimen book.
-                   </div>
+                   <?php 
+                        require_once "config.php";
+                        //$content = "";
+                        $result = mysqli_query($link,"SELECT content FROM courses WHERE course_id = '1'");
+                        while ($row = $result->fetch_assoc()) {
+                            echo $row['content']."<br>";
+                        }
+                    ?>
                </div> 
                
                
-            </section>
-            <aside id="lessons-section">
-                <a id="lesson" href = "">Hello, World! →</a>
-                <a id="lesson" href = "">Variables and Types →</a>
-                <a id="lesson" href = "">Conditionals →</a>
-                <a id="lesson" href = "">Arrays →</a>
-                <a id="lesson" href = "">Loops →</a>
-                <a id="lesson" href = "">Functions →</a>
-                <a id="lesson" href = "">Objects →</a>
-                <a id="lesson" href = "">Compiling and Running →</a>
-                
-           </aside>
+            
         </div>
 
 <?php get_footer();  ?>

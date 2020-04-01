@@ -34,7 +34,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
                     if(mysqli_stmt_fetch($stmt)){
-                        if($password = $hashed_password){
+                        if($password == $hashed_password){
                             session_start();
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
