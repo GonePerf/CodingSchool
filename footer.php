@@ -41,7 +41,6 @@
                     <p>This website is developed by GonePerf &copy</p>
                 </div>
             </footer>
-        
     </main>
     <?php  wp_footer(); ?>
 </body>

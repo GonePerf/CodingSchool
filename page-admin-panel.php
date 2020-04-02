@@ -12,14 +12,14 @@ require_once "config.php";
  ?>
 
 <main>
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
 
         <h2 class="page-heading">Administration panel</h2>
         <div id="course-container">
         <section id="blogpost" style = "width: 100%;  border: none;">
             <div id = "choose">
             <form action="" method="post">
-                <select name = "course_id">
+                <select name = "course_id" id = "course_id">
                 <option value="">----</option>
                 <?php 
                     
@@ -48,7 +48,7 @@ require_once "config.php";
                         $selected_val = $_POST['course_id'];
                         $result = mysqli_query($link,"SELECT content FROM courses WHERE course_id = '$selected_val'");
                         while ($row = $result->fetch_assoc()) {
-                            echo $row['content']."<br>";
+                            echo $row['content'];
                         }
                         
                     }
@@ -56,16 +56,11 @@ require_once "config.php";
                 ?>
              </div>
             <form action = "" method = "post">
-             <input name = "submit" id="change" type = "submit" value = "Submit" />
+             <button name = "submit" style="width: 100%; height: 40px;" id="change" type = "submit" onclick = "show()">Submit</Button>
              </form>
 
-             <?php 
-                if(isset($_POST['submit'])){
-                //    here updating database code
-                }
-                    
-             ?>
-            <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+            
+            
             </section>
             
         </div>
@@ -87,6 +82,40 @@ require_once "config.php";
                 },
                 theme: 'snow'
             });
+            var e = document.getElementById("course_id");
+            var content = quill.container.firstChild.innerHTML;
+                var id = e.options[e.selectedIndex].value;
+            function show(){
+                content = quill.container.firstChild.innerHTML;
+                id = e.options[e.selectedIndex].value;
+                alert(id);
+                jQuery.ajax({
+                    type: 'POST',
+                    data: {content:content, id:id},
+                error: function() {
+                    var err = "ajax error";
+                    alert(err);
+                },              
+                success: function(data) {
+                    <?php
+                    echo "alert('Weszło w php');";
+                        if(isset($_POST['content']) && isset($_POST['id'])){
+                            $content = '<div class="course-descrition">'.$_POST['content']."</div>";
+                            $id = $_POST['id'];
+                            $post = "UPDATE courses SET content = '$content' WHERE course_id = '$id'";
+                            if(mysqli_query($link,$post)){
+                                unset($content);
+                                unset($id);
+                            }
+                    }
+                
+
+
+                    ?>
+                    alert("Content of course was updated!");
+                }  
+                });
+            }
         </script>
         <style>
             select{
@@ -105,6 +134,7 @@ require_once "config.php";
                 transition: 0.4s;
                 margin-top: 25px;
                 margin-bottom: 25px;
+                box-shadow: none;
             }
             #change:hover{
                 color: red;
