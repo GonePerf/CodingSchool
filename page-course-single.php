@@ -16,8 +16,8 @@ get_header();  ?>
         <h2 class="page-heading">Course: 
             <?php   
                 require_once "config.php";
-               
-                $result = mysqli_query($link,"SELECT course_name FROM courses WHERE course_id = '1'");
+                
+                $result = mysqli_query($link,"SELECT course_name FROM courses WHERE course_id = ".$_GET['course']."");
                 while ($row = $result->fetch_assoc()) {
                     echo $row['course_name'];
                 }
@@ -30,15 +30,15 @@ get_header();  ?>
                    <div class="course-meta-blogspot">
                        The whole course created by GonePerf
                    </div>
-                   <div class="course-image">
-                       <img src="<?php echo get_template_directory_uri(); ?>/img/java.jpg"  style="width: 95%;" alt="Course Image">
-                   </div>
+                   <!-- <div class="course-image">
+                       <img src="/img/java.jpg"  style="width: 95%;" alt="Course Image">
+                   </div> -->
                    <?php 
                         require_once "config.php";
                         //$content = "";
-                        $result = mysqli_query($link,"SELECT content FROM courses WHERE course_id = '1'");
+                        $result = mysqli_query($link,"SELECT content FROM courses WHERE course_id = ".$_GET['course']."");
                         while ($row = $result->fetch_assoc()) {
-                            echo $row['content']."<br>";
+                            echo $row['content'];
                         }
                     ?>
                </div> 

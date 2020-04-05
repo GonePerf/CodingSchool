@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $username; 
-                            
+                            $_SESSION["course_id"] = 1;
                             
 
                             header("location: ".site_url());

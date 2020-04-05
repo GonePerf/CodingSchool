@@ -1,13 +1,13 @@
 ﻿<?php 
 session_start();
-
+$selected_val = "";
 get_header();
 
-if((!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) && $_SESSION['username'] != 'admin@wp.pl'){
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: ".site_url('/log-in'));
 
     exit;
-} 
+}
 require_once "config.php";
  ?>
 
@@ -84,18 +84,13 @@ require_once "config.php";
             });
             var e = document.getElementById("course_id");
             var content = quill.container.firstChild.innerHTML;
-                var id = e.options[e.selectedIndex].value;
+            var id = e.options[e.selectedIndex].value;
             function show(){
                 content = quill.container.firstChild.innerHTML;
-                id = e.options[e.selectedIndex].value;
                 alert(id);
                 jQuery.ajax({
                     type: 'POST',
-                    data: {content:content, id:id},
-                error: function() {
-                    var err = "ajax error";
-                    alert(err);
-                },              
+                    data: {content:content, id:id},            
                 success: function(data) {
                     <?php
                     echo "alert('Weszło w php');";

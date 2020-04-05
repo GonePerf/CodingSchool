@@ -378,7 +378,7 @@ footer #social-media-footer a .fa-linkedin:hover{
 #blogpost{
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 100%;
     border-left: 1px solid #999;
 }
 #blogpost .course{

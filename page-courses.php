@@ -1,120 +1,38 @@
 <?php 
 session_start();
+require_once "config.php";
 get_header(); ?>
 <main>
         <h2 class = "page-heading">All Courses</h2>
             <section>
-
-                <div class="course">
-                    <div class="course-image">
-                        <a href="<?php echo site_url('/java'); ?>">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/java.jpg" alt="Java course">
-                        </a>
-                    </div>
-                    <div class="course-description">
-                        <a href="<?php echo site_url('/java'); ?>">
-                            <h3>Java</h3>
-                        </a>
-                        <div class="course-meta">
-                            Created by GonePerf
+                <?php 
+                    $result = mysqli_query($link,"SELECT course_id, course_name, course_description FROM courses");
+                    $help_img_array = ["/img/java.jpg","/img/html.jpg","/img/python.jpg","/img/AI.jpg"];
+                    $i = 0;
+                    while ($row = $result->fetch_assoc()) {
+                        //echo "<option selected value=".$row['course_id'].">".$row['course_name']."</option>";
+                        echo '<div class="course">
+                        <div class="course-image">
+                            <a href="'.site_url('/course-single?course='.$row['course_id'].'').'">
+                                <img src="'.get_template_directory_uri().$help_img_array[$i].'" alt="Java course">
+                            </a>
                         </div>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and
-                     typesetting industry. Lorem Ipsum has been the 
-                     industry's standard dummy text ever since the 1500s,
-                      when an unknown printer took a galley of type and
-                       scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and
-                       typesetting industry. Lorem Ipsum has been the 
-                       industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and
-                         scrambled it to make a type specimen book.
-                        </p>
-                        <a href="<?php echo site_url('/java'); ?>" class="btn-readmore">Read more</a>
-                    </div>
-                </div>
-                <div class="course">
-                    <div class="course-image">
-                        <a href="<?php echo site_url('/python'); ?>">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/python.jpg">
-                        </a>
-                    </div>
-                    <div class="course-description">
-                        <a href="<?php echo site_url('/python'); ?>">
-                            <h3>Python</h3>
-                        </a>
-                        <div class="course-meta">
-                            Created by GonePerf
+                        <div class="course-description">
+                            <a href="'.site_url('/course-single?course='.$row['course_id'].'').'">
+                                <h3>'.$row['course_name'].'</h3>
+                            </a>
+                            <div class="course-meta">
+                                Created by GonePerf
+                            </div>
+                            <p>
+                            '.$row['course_description'].'
+                            </p>
+                            <a href="'.site_url('/course-single?course='.$row['course_id'].'').'" class="btn-readmore">Read more</a>
                         </div>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and
-                     typesetting industry. Lorem Ipsum has been the 
-                     industry's standard dummy text ever since the 1500s,
-                      when an unknown printer took a galley of type and
-                       scrambled it to make a type specimen book.
-                       Lorem Ipsum is simply dummy text of the printing and
-                     typesetting industry. Lorem Ipsum has been the 
-                     industry's standard dummy text ever since the 1500s,
-                      when an unknown printer took a galley of type and
-                       scrambled it to make a type specimen book.
-                        </p>
-                        <a href="<?php echo site_url('/python'); ?>" class="btn-readmore">Read more</a>
-                    </div>
-                </div>
-                <div class="course">
-                    <div class="course-image">
-                        <a href="<?php echo site_url('/htmlcss'); ?>">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/html.jpg">
-                        </a>
-                    </div>
-                    <div class="course-description">
-                        <a href="<?php echo site_url('/htmlcss'); ?>">
-                            <h3>HTML + CSS</h3>
-                        </a>
-                        <div class="course-meta">
-                            Created by GonePerf
-                        </div>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and
-                     typesetting industry. Lorem Ipsum has been the 
-                     industry's standard dummy text ever since the 1500s,
-                      when an unknown printer took a galley of type and
-                       scrambled it to make a type specimen book.
-                       Lorem Ipsum is simply dummy text of the printing and
-                     typesetting industry. Lorem Ipsum has been the 
-                     industry's standard dummy text ever since the 1500s,
-                      when an unknown printer took a galley of type and
-                       scrambled it to make a type specimen book.
-                        </p>
-                        <a href="<?php echo site_url('/htmlcss'); ?>" class="btn-readmore">Read more</a>
-                    </div>
-                </div>
-                <div class="course">
-                    <div class="course-image">
-                        <a href="<?php echo site_url('/ai'); ?>">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/AI.jpg">
-                        </a>
-                    </div>
-                    <div class="course-description">
-                        <a href="<?php echo site_url('/ai'); ?>">
-                            <h3>Artifical Inteligence</h3>
-                        </a>
-                        <div class="course-meta">
-                            Created by GonePerf
-                        </div>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and
-                     typesetting industry. Lorem Ipsum has been the 
-                     industry's standard dummy text ever since the 1500s,
-                      when an unknown printer took a galley of type and
-                       scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and
-                       typesetting industry. Lorem Ipsum has been the 
-                       industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and
-                         scrambled it to make a type specimen book.
-                        </p>
-                        <a href="<?php echo site_url('/ai'); ?>" class="btn-readmore">Read more</a>
-                    </div>
-                </div>
+                    </div>';
+                    $i++;
+                    }
+                ?>
                 
             </section>
 <?php get_footer(); ?>
