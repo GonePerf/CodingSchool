@@ -39,25 +39,43 @@ require_once "config.php";
                     // }
                 ?>
                 </select>
+                <select name = "free_or_not">
+                        <option value="">----</option>
+                        <option <?php if($_POST["free_or_not"] == "1") echo "selected" ?> value="1">Free content</option>
+                        <option <?php if($_POST["free_or_not"] == "2") echo "selected" ?> value="2">Not free content</option>
+                </select>
                 <input name = "edit" id="change" style = "float: right; width: 45%; height: 40px;" type = "submit" value = "Edit" />
                 </form>
             </div>
             <div id="editor">
                 <?php 
                     if(isset($_POST['edit'])){
-                        $selected_val = $_POST['course_id'];
-                        $result = mysqli_query($link,"SELECT content FROM courses WHERE course_id = '$selected_val'");
-                        while ($row = $result->fetch_assoc()) {
-                            echo $row['content'];
+                        if($_POST["free_or_not"] == "" || $_POST["course_id"] == ""){
+                            echo "choose";
+                        }else{
+                            if($_POST["free_or_not"] == "1"){
+                                $selected_val = $_POST['course_id'];
+                                $result = mysqli_query($link,"SELECT free_content FROM courses WHERE course_id = '$selected_val'");
+                                while ($row = $result->fetch_assoc()) {
+                                    echo $row['free_content'];
+                                }
+                            }else{
+                                $selected_val = $_POST['course_id'];
+                                $result = mysqli_query($link,"SELECT content FROM courses WHERE course_id = '$selected_val'");
+                                while ($row = $result->fetch_assoc()) {
+                                    echo $row['content'];
+                                }
+                            }
                         }
+                        
                         
                     }
                     
                 ?>
              </div>
-            <form action = "" method = "post">
+            
              <button name = "submit" style="width: 100%; height: 40px;" id="change" type = "submit" onclick = "show()">Submit</Button>
-             </form>
+             
 
             
             
@@ -87,17 +105,21 @@ require_once "config.php";
             var id = e.options[e.selectedIndex].value;
             function show(){
                 content = quill.container.firstChild.innerHTML;
-                alert(id);
                 jQuery.ajax({
                     type: 'POST',
                     data: {content:content, id:id},            
                 success: function(data) {
                     <?php
-                    echo "alert('Weszło w php');";
                         if(isset($_POST['content']) && isset($_POST['id'])){
                             $content = '<div class="course-descrition">'.$_POST['content']."</div>";
                             $id = $_POST['id'];
-                            $post = "UPDATE courses SET content = '$content' WHERE course_id = '$id'";
+                            if($_POST["free_or_not"] == "2"){
+                                $post = "UPDATE courses SET content = '$content' WHERE course_id = '$id'";
+                            } 
+                            else{
+                                $post = "UPDATE courses SET free_content = '$content' WHERE course_id = '$id'";
+
+                            }
                             if(mysqli_query($link,$post)){
                                 unset($content);
                                 unset($id);
@@ -117,7 +139,7 @@ require_once "config.php";
                 margin-top: 25px;
                 margin-bottom: 25px;
                 height: 40px;
-                width: 45%;
+                width: 25%;
                 float: left;
 
             }

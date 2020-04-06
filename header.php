@@ -12,6 +12,7 @@
 <body>
     <div id="slideout-menu">
         <ul>
+            
             <li>
                 <a href="<?php echo site_url(''); ?>">
                 Home</a>
@@ -28,14 +29,25 @@
                 <a href="<?php echo site_url('/contact'); ?>">Contact</a>
             </li>
             <li>
+                <?php if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){ 
+                   echo  "<a href=".site_url('/logout')." style='color: red;'>Sign Out</a>";
+                    
+                }else{
+                    echo "<a href=".site_url('/log-in').
+                    ">Sign In</a>";
+                }
+                ?>
+            </li>
+            <li>
                 <input type="text" placeholder="Search">
             </li>
+            
         </ul>
     </div>
 
     <nav>
         <div id="logo-img">
-            <a href="#">
+            <a href="<?php echo site_url(''); ?>">
                 <!-- LOGO -->
                 <img src="<?php echo get_template_directory_uri(); ?>/img/logo.png">
             
