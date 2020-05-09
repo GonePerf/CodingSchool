@@ -1,13 +1,20 @@
 ﻿<?php 
 session_start();
+
+
 $selected_val = "";
-get_header();
-
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: ".site_url('/log-in'));
 
+    header("location: ".site_url('/log-in'));
     exit;
 }
+if($_SESSION["username"] == "admin@wp.pl"){
+        
+}
+else {
+    header("location: ".site_url(''));
+}
+get_header();
 require_once "config.php";
  ?>
 
@@ -104,7 +111,7 @@ require_once "config.php";
             var content = quill.container.firstChild.innerHTML;
             var id = e.options[e.selectedIndex].value;
             function show(){
-                content = quill.container.firstChild.innerHTML;
+                content = quill.root.innerHTML;
                 jQuery.ajax({
                     type: 'POST',
                     data: {content:content, id:id},            
@@ -124,7 +131,7 @@ require_once "config.php";
                                 unset($content);
                                 unset($id);
                             }
-                    }
+                        }
                 
 
 
