@@ -1,23 +1,27 @@
 <!-- ADVERTISEMENT PLACE -->
-<div id="custom-ad-bottom" class="ad-closed">
+<?php
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    
+}else{
+echo '<div id="custom-ad-bottom" class="ad-closed">
   <div id="close-ad">
      	Close Ad
   </div>
   <script>
   //close ad block
  
-let closeAdButton = document.getElementById('close-ad'),
-    adContainer = document.getElementById('custom-ad-bottom');
-document.addEventListener('click', function(e){
+let closeAdButton = document.getElementById("close-ad"),
+    adContainer = document.getElementById("custom-ad-bottom");
+document.addEventListener("click", function(e){
   if (e.target == closeAdButton) {
     //window.scrollBy(0, 300);
-    adContainer.classList.add('ad-closed');
+    adContainer.classList.add("ad-closed");
     setTimeout(displayNone, 1000);
   };
 });
     function displayNone() {
-      document.getElementById('custom-ad-bottom').classList.add('display-none');
-      console.log('class added');
+      document.getElementById("custom-ad-bottom").classList.add("display-none");
+      console.log("class added");
     }
   </script>
   <!-- bottom ad container -->
@@ -31,7 +35,9 @@ document.addEventListener('click', function(e){
                 RECOMENDED COURSES
     </div>
   <!-- bottom /ad container -->
-</div>
+</div>';
+        }
+?>
 <footer>
                 <div id="left-footer">
                     <h3>Quick Links</h3>

@@ -41,7 +41,20 @@ get_header();
             <section id="blogpost">
                <div class="course">
                    <div class="course-meta-blogspot">
-                       The whole course created by GonePerf
+                       The whole course created by GonePerf <br>   Stars average:
+                        <?php
+                        require_once "config.php";
+                        $result = mysqli_query($link,"SELECT AVG(stars) AS average FROM owned WHERE course_id = ".$_GET['course']." AND stars > 0"); 
+                        while ($row = $result->fetch_assoc()) {
+                            if($row['average'] == "") echo "No ratings for this course :/";
+                            echo $row['average'];
+                        }
+                        $result = mysqli_query($link,"SELECT COUNT(*) AS prime_users_number FROM owned WHERE course_id = ".$_GET['course']); 
+                        echo "<br>Number purchased: ";
+                        while ($row = $result->fetch_assoc()) {
+                            echo $row['prime_users_number'];
+                        }
+                        ?>
                    </div>
                    <!-- <div class="course-image">
                        <img src="/img/java.jpg"  style="width: 95%;" alt="Course Image">
@@ -85,7 +98,7 @@ get_header();
                             echo "<i id = 'result'>( ".$stars."/5 )</i><button name='vote'  onclick=\"vote()\" type='submit' style='width: 232px; height: 40px;'>Vote</button>";
                         }
                         else{
-                            echo "<button style='width:95%; text-align: center; margin: 10px;'><i class='fas fa-unlock-alt' style='margin-right: 15px;'></i>Get prime content</button>";
+                            echo "<button onclick="."location.href='".site_url('get-prime?course='.$_GET['course'].'')."'"."  style='width:95%; text-align: center; margin: 10px;'><i class='fas fa-unlock-alt' style='margin-right: 15px;'></i>Get prime content</button>";
                         }
                     ?>
                     <style>

@@ -68,7 +68,7 @@
             $name = trim($_POST["reg-name"]);
         }
         if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
-            $sql = "INSERT INTO users(email, password, name, c1, c2, c3, c4)
+            $sql = "INSERT INTO users(email, password, name)
               VALUES('$username', '$password', '$name', 0, 0, 0, 0)";
             
             if($stmt = mysqli_prepare($link, $sql)){
