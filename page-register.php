@@ -69,7 +69,7 @@
         }
         if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
             $sql = "INSERT INTO users(email, password, name)
-              VALUES('$username', '$password', '$name', 0, 0, 0, 0)";
+              VALUES('$username', '$password', '$name')";
             
             if($stmt = mysqli_prepare($link, $sql)){
                 mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
