@@ -126,10 +126,11 @@ nav ul{
     display: flex;
     height: 100%;
     background: #111;
-    padding: 0 32px;
+    padding: 0 12px;
     align-items: center;
     color: white;
     transition: 0.4s;
+    color: #f8c900;
 }
 
 #logo-img img{
@@ -548,55 +549,9 @@ footer #social-media-footer a .fa-linkedin:hover{
   }
   .ad-container{
       width: 90%; 
-      height: 90px;
-      background: white;
+      height: 50px;
+      background: lightgray;
       text-align: center;
-  }
-  #ad-left{
-      background-image: url(img/ad-bg.jpg);
-      opacity: 0.8;
-      width: 40%;
-      height: 90px;
-      float: left;
-      /* border-radius: 40px 0 0 0; */
-      text-align: center;
+      padding-top: 35px;
       font-size: 28px;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      display: flex;
-
   }
-  #ad-right{
-      /* background-image: url(img/java.png);
-      background-position: center; */
-      /* justify-content: center;
-      cursor: pointer;
-      text-align: center;
-      font-size: 20px;
-      align-items: center;
-      background: black;
-      opacity: 0.8;*/
-      width: 30%; 
-      height: 90px;
-       float: right;
-      /* border-radius: 0 40px; */
-      /* transition: 0.4s;
-      color: #fff; 
-      display: flex; */
-  }
-  /* #ad-right:hover{
-        transition: 0.4s;
-        font-size: 28px;
-        box-shadow: inset 27px 0 51px -18px rgba(255, 0, 0, 0.75);
-        color: red;
-        text-decoration: bold;
-  }
-  @media (max-width: 532px){
-      #ad-left{
-          display: none;
-      }
-      #ad-right{
-          width: 100%;
-      }
-  } */

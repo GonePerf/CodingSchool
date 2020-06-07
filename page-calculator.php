@@ -1,18 +1,16 @@
 ﻿<?php get_header(); ?>
 <main>
-        <h2 class="page-heading">Advanced Calculator in Java
-            
+        <h2 class="page-heading">
+            Calculator
         </h2>
-        <div id="course-container">
+        <div id="course-container" style="margin-bottom: 40px; text-align: center;"> 
             <section id="blogpost">
                <div class="course">
-                   <div class="course-meta-blogspot">
-                       My first project
-                   </div>
+                   
                    <div class="course-image">
-                       <img src="/img/calculator.png"  style="width: 95%;" alt="Course Image">
+                       
                    </div>
-                    <h4>A friend from another university inspired me to do such a program. He had such a task and had no one to write back from. Unfortunately, he couldn't, either, because when I finished it was next semester ^, ^</h4>
+                    <?php echo do_shortcode('[pdfjs-viewer viewer_width=0 viewer_height=1000 url=http://localhost:10000/wp-content/uploads/2020/05/PROJECT_DESCRIPTION.pdf download=true print=true fullscreen=true fullscreen_text="View%20Fullscreen" zoom=150 ]'); ?>                    
                     <style>
                     .fa-star{
                         color: black;
@@ -42,7 +40,14 @@
                         transition: 0.4s;
                     }
 
-                    
+                    /* a{
+                        font-size: 30px;
+                        transition: 0.4s;
+                    } */
+                    a:hover{
+                        color: red;
+                        transition: 0.4s;
+                    }
                     </style>
                     
                     
@@ -52,6 +57,6 @@
             
         </div>
 
-
+<!--  -->
 
 <?php get_footer(); ?>

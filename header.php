@@ -8,7 +8,13 @@
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <link href="https://cdn.quilljs.com/1.3.6/quill.core.css" rel="stylesheet">
     <script type="text/javascript">
-     window.onload=function()  //executes when the page finishes loading
+    
+    <?php
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    
+    }else{
+    echo "
+    window.onload=function()  //executes when the page finishes loading
     {
         setTimeout(func1, 5000);  //sets a timer which calls function func1 after 2,000 milliseconds = 2 secs.
         
@@ -17,9 +23,11 @@
     {
         //document.getElementById('custom-ad-bottom').classList.remove('display-none');
         for(var i = 0.0; i < 1.0; i+=0.1){
-            document.getElementById("custom-ad-bottom").classList.remove("ad-closed");
+            document.getElementById('custom-ad-bottom').classList.remove('ad-closed');
         }
+    }";
     }
+    ?>
     </script>
 </head>
 <body>

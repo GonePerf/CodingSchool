@@ -39,7 +39,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $username; 
-                            
+                            $sql = "SELECT course_id FROM owned WHERE user_id = ".$id." ORDER BY course_id ASC";
+                            $result = mysqli_query($link,$sql);
+                            $_SESSION['owned'] = array();
+                           
+                            while ($row = $result->fetch_assoc()) {
+                                array_push($_SESSION['owned'], $row['course_id']);
+                                
+                            }
                             
 
                             header("location: ".site_url());

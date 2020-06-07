@@ -18,7 +18,13 @@ get_header();
         <h2 class="page-heading">Course: 
             <?php   
                 require_once "config.php";
-                
+                $average = 0;
+                        $result = mysqli_query($link,"SELECT AVG(stars) AS average FROM owned WHERE course_id = ".$_GET['course']." AND stars > 0"); 
+                        while ($row = $result->fetch_assoc()) {
+                            
+                            
+                            $average = $row['average'];
+                        }
                 $result = mysqli_query($link,"SELECT course_name FROM courses WHERE course_id = ".$_GET['course']."");
                 while ($row = $result->fetch_assoc()) {
                     echo $row['course_name'];
@@ -38,19 +44,26 @@ get_header();
             ?>
         </h2>
         <div id="course-container">
+       
             <section id="blogpost">
                <div class="course">
+               <?php 
+        if($average - round($average,0) > 0.3 )   echo  "<i style='float:right;'class='fas fa-star-half light'  ><span></span><span></span><span></span><span></span></i>";
+        for($i = 1; $i <= round($average,0); $i++){
+            echo  "<i style='float:right;'class='fas fa-star light' id = 'a".(6-$i)."' ><span></span><span></span><span></span><span></span></i>";
+        }
+
+        // echo "<progress id='file' value='".$average."' max='5'> ".$average."cos </progress>";
+        ?>
                    <div class="course-meta-blogspot">
-                       The whole course created by GonePerf <br>   Stars average:
+                       The whole course created by GonePerf <br> Stars average:
                         <?php
+                        if($average == "") echo "No ratings for this course :/";
                         require_once "config.php";
-                        $result = mysqli_query($link,"SELECT AVG(stars) AS average FROM owned WHERE course_id = ".$_GET['course']." AND stars > 0"); 
-                        while ($row = $result->fetch_assoc()) {
-                            if($row['average'] == "") echo "No ratings for this course :/";
-                            echo $row['average'];
-                        }
+                        
+                        echo $average;
                         $result = mysqli_query($link,"SELECT COUNT(*) AS prime_users_number FROM owned WHERE course_id = ".$_GET['course']); 
-                        echo "<br>Number purchased: ";
+                        echo "<br>Number purachased: ";
                         while ($row = $result->fetch_assoc()) {
                             echo $row['prime_users_number'];
                         }
@@ -79,11 +92,11 @@ get_header();
                                 $stars = $row['stars'];
                                 for($i = 1; $i <= 5; $i++){
                                     if($i <= $row['stars']){
-                                      echo  "<i class='fas fa-star light' id = '".$i."' onclick='light(".$i.")' ></i>";
+                                      echo  "<i class='fas fa-star light' id = '".$i."' onclick='lighter(".$i.")' ></i>";
 
                                     }
                                     else{
-                                        echo  "<i class='fas fa-star' id = '".$i."' onclick='light(".$i.")' ></i>";
+                                        echo  "<i class='fas fa-star' id = '".$i."' onclick='lighter(".$i.")' ></i>";
 
                                     }
                                 }
@@ -110,14 +123,19 @@ get_header();
                         border-radius: 5px;
                         font-size: 15px;
                     }
-                    .fa-star{
+                    .fa-star {
                         color: black;
                         padding: 10px;
                         padding-bottom: 30px;
                         font-size: 32px;
                     }
+                    .fa-star-half{
+                        padding: 10px;
+                        padding-bottom: 30px;
+                        font-size: 32px;
+                    }
                     .light{
-                        color: yellow;
+                        color: #f8c900;
                     }
                     
                     button{
@@ -137,12 +155,23 @@ get_header();
                         cursor: pointer;
                         transition: 0.4s;
                     }
+                    progress{
+                        width: 300px;
+                        background: #eee;
+                        height: 30px;
+                        margin-left: 20px;
+                        margin-bottom: 20px;
+                    }
 
                     
                     </style>
                     <script>
+                    
+                    // if(average < 5){
+                    //     document.getElementById('a5').classList.remove('light');
+                    // }
                         var stars = 0;
-                        function light(x){
+                        function lighter(x){
                             stars = x;
                             for(var i = 1; i <= 5; i++){
                                 if(i <= x){

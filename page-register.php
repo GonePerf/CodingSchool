@@ -47,7 +47,7 @@
         }
         if(empty(trim($_POST["reg-password_1"]))){
             $password_err = "Please enter a password.";     
-        } elseif(strlen(trim($_POST["reg-password_1"])) < 6){
+        }if(strlen($_POST["reg-password_1"]) < 6){
             $password_err = "Password must have atleast 6 characters.";
         } else{
             $password = trim($_POST["reg-password_1"]);
@@ -136,11 +136,11 @@ get_header();
             <div style="width: 100%;  margin-bottom: 50px;">
                 <div id="inputs" style = "width: 250px; margin:auto;">
                     <form method="post" action="<?php echo site_url('/register'); ?>">
-                    <?php   echo $password_er." ".$name_err." ".$username_err  ?>
-                        <input required name="reg-email" placeholder="E-mail" type = "email" style = "width: 200px; margin-bottom: 10px; margin-top:10px; text-align: center;" >
-                        <input required name="reg-password_1" placeholder="Password" type = "password" style = "width: 200px; margin-bottom: 10px; text-align: center;">
-                        <input required name="reg-password_2" placeholder="Confirm password" type = "password" style = "width: 200px; margin-bottom: 10px; text-align: center;">
-                        <input required name="reg-name" placeholder="Your name" type = "text" style = "width: 200px; margin-bottom: 10px; text-align: center;">
+                    <?php   echo $confirm_password_err." ".$password_err." ".$name_err." ".$username_err  ?>
+                        <input  name="reg-email" placeholder="E-mail" type = "email" style = "width: 200px; margin-bottom: 10px; margin-top:10px; text-align: center;" >
+                        <input  name="reg-password_1" placeholder="Password" type = "password" style = "width: 200px; margin-bottom: 10px; text-align: center;">
+                        <input  name="reg-password_2" placeholder="Confirm password" type = "password" style = "width: 200px; margin-bottom: 10px; text-align: center;">
+                        <input  name="reg-name" placeholder="Your name" type = "text" style = "width: 200px; margin-bottom: 10px; text-align: center;">
                         <button name="register-btn" type="submit" style="width: 232px; height: 40px;">Submit</button>
                         
                     </form>
